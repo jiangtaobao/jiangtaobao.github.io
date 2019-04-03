@@ -10,8 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="Spring常用配置实体类和配置文件映射12	通过注解@ConfigurationProperties(prefix=&amp;quot;配置文件中的key的前缀&amp;quot;)可以将配置文件中的配置自动与实体进行映射
-整合MyBatis1234#pojo别名扫描包mybatis.type-aliases-p">
+        <meta name="description" content="Spring常用配置实体类和配置文件映射12通过注解@ConfigurationProperties(prefix=&amp;quot;配置文件中的key的前缀&amp;quot;)可以将配置文件中的配置自动与实体进行映射
+整合MyBatis1234#pojo别名扫描包mybatis.type-aliases-pa">
     
 
     <!--Author-->
@@ -21,7 +21,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="你好，hexo">
+        <meta property="og:title" content="SpringBoot 基础配置">
     
 
     <!--Open Graph Description-->
@@ -43,7 +43,7 @@
 
     <!-- Title -->
     
-    <title>你好，hexo - 慕家客栈</title>
+    <title>SpringBoot 基础配置 - 慕家客栈</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -148,7 +148,7 @@
     <div class="post-header">
         <h1 class="title">
             <a href="/2019/03/27/Spring Notes/">
-                你好，hexo
+                SpringBoot 基础配置
             </a>
         </h1>
         <div class="post-info">
@@ -166,7 +166,7 @@
         
 
         <!-- Post Content -->
-        <h2 id="Spring常用配置"><a href="#Spring常用配置" class="headerlink" title="Spring常用配置"></a>Spring常用配置</h2><h3 id="实体类和配置文件映射"><a href="#实体类和配置文件映射" class="headerlink" title="实体类和配置文件映射"></a>实体类和配置文件映射</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	通过注解@ConfigurationProperties(prefix=&quot;配置文件中的key的前缀&quot;)可以将配置文件中的配置自动与实体进行映</span><br><span class="line">射</span><br></pre></td></tr></table></figure>
+        <h2 id="Spring常用配置"><a href="#Spring常用配置" class="headerlink" title="Spring常用配置"></a>Spring常用配置</h2><h3 id="实体类和配置文件映射"><a href="#实体类和配置文件映射" class="headerlink" title="实体类和配置文件映射"></a>实体类和配置文件映射</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过注解@ConfigurationProperties(prefix=&quot;配置文件中的key的前缀&quot;)可以将配置文件中的配置自动与实体进行映</span><br><span class="line">射</span><br></pre></td></tr></table></figure>
 <h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#pojo别名扫描包</span><br><span class="line">mybatis.type-aliases-package=com.itheima.domain</span><br><span class="line">#加载Mybatis映射文件</span><br><span class="line">mybatis.mapper-locations=classpath:mapper/*Mapper.x</span><br></pre></td></tr></table></figure>
 <h3 id="整合Junit"><a href="#整合Junit" class="headerlink" title="整合Junit"></a>整合Junit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest(classes = MySpringBootApplication.class)</span><br></pre></td></tr></table></figure>
 <h3 id="整合Spring-Data-JPA"><a href="#整合Spring-Data-JPA" class="headerlink" title="整合Spring Data JPA"></a>整合Spring Data JPA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#DB Configuration:</span><br><span class="line">spring.datasource.driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br><span class="line">#JPA Configuration:</span><br><span class="line">spring.jpa.database=MySQL</span><br><span class="line">spring.jpa.show-sql=true</span><br><span class="line">spring.jpa.generate-ddl=true</span><br><span class="line">spring.jpa.hibernate.ddl-auto=update</span><br><span class="line">spring.jpa.hibernate.naming_strategy=org.hibernate.cfg.ImprovedNamingStrate</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">实体类</span><br><span class="line">@Id</span><br><span class="line">@GeneratedValue(strategy = GenerationType.IDENTITY)</span><br></pre></td></tr></table></figure>
@@ -213,7 +213,7 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2019/03/27/Spring Notes/">你好，hexo</a>
+                <a class="footer-post" href="/2019/03/27/Spring Notes/">SpringBoot 基础配置</a>
             </li>
             
             <li>
