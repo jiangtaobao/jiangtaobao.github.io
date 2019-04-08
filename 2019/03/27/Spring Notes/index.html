@@ -171,6 +171,7 @@
 <h3 id="整合Junit"><a href="#整合Junit" class="headerlink" title="整合Junit"></a>整合Junit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest(classes = MySpringBootApplication.class)</span><br></pre></td></tr></table></figure>
 <h3 id="整合Spring-Data-JPA"><a href="#整合Spring-Data-JPA" class="headerlink" title="整合Spring Data JPA"></a>整合Spring Data JPA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#DB Configuration:</span><br><span class="line">spring.datasource.driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br><span class="line">#JPA Configuration:</span><br><span class="line">spring.jpa.database=MySQL</span><br><span class="line">spring.jpa.show-sql=true</span><br><span class="line">spring.jpa.generate-ddl=true</span><br><span class="line">spring.jpa.hibernate.ddl-auto=update</span><br><span class="line">spring.jpa.hibernate.naming_strategy=org.hibernate.cfg.ImprovedNamingStrate</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">实体类</span><br><span class="line">@Id</span><br><span class="line">@GeneratedValue(strategy = GenerationType.IDENTITY)</span><br></pre></td></tr></table></figure>
 <h3 id="整合Redis"><a href="#整合Redis" class="headerlink" title="整合Redis"></a>整合Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Redis</span><br><span class="line">spring.redis.host=127.0.0.1</span><br><span class="line">spring.redis.port=6379</span><br></pre></td></tr></table></figure>
+<h3 id="Spring框架四大原则"><a href="#Spring框架四大原则" class="headerlink" title="Spring框架四大原则"></a>Spring框架四大原则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用POJO开发---轻量、最小侵入开发</span><br><span class="line">依赖注入、接口编程---松耦合</span><br><span class="line">AOP和约定---声明式编程</span><br><span class="line">AOP和template---减少模块化编程</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -211,6 +212,14 @@
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
         <h2>Recent Posts</h2>
         <ul>
+            
+            <li>
+                <a class="footer-post" href="/2019/04/08/docer/">Untitled</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/04/04/springboot实战开发-笔记/">springboot实战开发-笔记</a>
+            </li>
             
             <li>
                 <a class="footer-post" href="/2019/03/27/Spring Notes/">SpringBoot 基础配置</a>

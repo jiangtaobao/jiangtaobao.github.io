@@ -147,6 +147,154 @@
 
     <div class="post-header index">
         <h1 class="title">
+            <a href="/2019/04/08/docer/">
+                Untitled
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-04-08</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="1-K8S架构和组件"><a href="#1-K8S架构和组件" class="headerlink" title="1.K8S架构和组件"></a>1.K8S架构和组件</h2><p><img src="C:\Users\Think\Desktop\k8s课程介绍与大纲\K8S课程\讲义\img\360截图17290509342963.png" alt="360截图17290509342963"></p>
+<h3 id="1-1-Master"><a href="#1-1-Master" class="headerlink" title="1.1 Master"></a>1.1 Master</h3><ul>
+<li><p>Kubernetes API Server</p>
+<p>作为Kubernetes系统的入口，其封装了核心对象的增删改查操作，以RESTful API接口方式提供给外部客户和内部组件调用。维护的REST对象持久化到Etcd中存储。</p>
+</li>
+<li><p>Kubernetes Scheduler<br>为新建立的Pod进行节点(node)选择(即分配机器)，负责集群的资源调度。组件抽离，可以方便替换成其他调度器。</p>
+</li>
+<li><p>Kubernetes Controller</p>
+<p>负责执行各种控制器，目前已经提供了很多控制器来保证Kubernetes的正常运行。</p>
+</li>
+<li><p>Replication Controller</p>
+<p>管理维护Replication Controller，关联Replication Controller和Pod，保证Replication Controller定义的副本数量与实际运行Pod数量一致。</p>
+</li>
+</ul>
+<h3 id="1-2-Node"><a href="#1-2-Node" class="headerlink" title="1.2 Node"></a>1.2 Node</h3><ul>
+<li><p>Kubelet</p>
+<p>负责管控容器，Kubelet会从Kubernetes API Server接收Pod的创建请求，启动和停止容器，监控容器运行状态并汇报给Kubernetes API Server。</p>
+</li>
+</ul>
+<ul>
+<li><p>Kubernetes Proxy</p>
+<p>负责为Pod创建代理服务，Kubernetes Proxy会从Kubernetes API Server获取所有的Service信息，并根据Service的信息创建代理服务，实现Service到Pod的请求路由和转发，从而实现Kubernetes层级的虚拟转发网络。</p>
+</li>
+</ul>
+<ul>
+<li><p>Docker  </p>
+<p>Node上需要运行容器服务</p>
+</li>
+</ul>
+<h2 id="2-K8S集群搭建常见问题"><a href="#2-K8S集群搭建常见问题" class="headerlink" title="2.K8S集群搭建常见问题"></a>2.K8S集群搭建常见问题</h2><ul>
+<li><p>解决 kubectl get pods时No resources found问题</p>
+<p>1、vim /etc/kubernetes/apiserver<br>2、找到”KUBE_ADMISSION_CONTROL=”-       admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota”，去掉ServiceAccount，保存退出。<br>3、systemctl restart kube-apiserver  重启此服务</p>
+</li>
+<li><p>pull 失败</p>
+<ul>
+<li><p>解决方案1</p>
+<p>1、yum install <em>rhsm</em> -y</p>
+<p>2、docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest</p>
+<p>如果以上两步解决问题了，那么就不需要在执行下面操作</p>
+<p>3、docker search pod-infrastructure</p>
+<p>4、docker pull docker.io/tianyebj/pod-infrastructure</p>
+<p>5、docker tag tianyebj/pod-infrastructure 192.168.126.143:5000/pod-infrastructure  </p>
+<p>6、docker push 192.168.126.143:5000/pod-infrastructure</p>
+<p>7、vi /etc/kubernetes/kubelet </p>
+<p>修改 KUBELET_POD_INFRA_CONTAINER=”–pod-infra-container-image=192.168.126.143:5000/pod-    infrastructure:latest”</p>
+<p>8、重启服务</p>
+<p>systemctl restart kube-apiserver<br>systemctl restart kube-controller-manager<br>systemctl restart kube-scheduler<br>systemctl restart kubelet<br>systemctl restart kube-proxy</p>
+</li>
+<li><p>解决方案2</p>
+<p>1、docker pull kubernetes/pause</p>
+<p>2、docker tag docker.io/kubernetes/pause:latest 192.168.126.143:5000/google_containers/pause-amd64.3.0</p>
+<p>3、docker push 192.168.126.143:5000/google_containers/pause-amd64.3.0</p>
+<p>4、vi /etc/kubernetes/kubelet配置为</p>
+<p>​    KUBELET_ARGS=”–pod_infra_container_image=192.168.126.143:5000/google_containers/pause-amd64.3.0”</p>
+<p>5、重启kubelet服务   systemctl restart kubelet</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">私有仓库搭建</span><br><span class="line">docker pull registry</span><br><span class="line">docker run -di --name=registry -p 5000:5000 registry</span><br><span class="line">修改daemon.json &#123;&quot;insecure-registries&quot;:[&quot;192.168.126.148:5000&quot;]&#125;</span><br><span class="line">重启docker服务 systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h2 id="3-常用命令"><a href="#3-常用命令" class="headerlink" title="3.常用命令"></a>3.常用命令</h2><ul>
+<li><p>获取当前命名空间下的容器</p>
+<p>kubectl get pods</p>
+</li>
+<li><p>获取所有容器l列表</p>
+<p>kubectl get  all</p>
+</li>
+<li><p>创建 容器</p>
+<p>kubectl create -f kubernate-pvc.yaml</p>
+</li>
+<li><p>删除容器</p>
+<p>kubectl delete pods/test-pd  或者 kubectl delete -f rc-nginx.yaml</p>
+</li>
+<li><p>查看指定pod跑在哪个node上</p>
+<p>kubectl get pod /test-pd -o wide </p>
+</li>
+<li><p>查看容器日志</p>
+<p>Kubectl logs nginx-8586cf59-mwwtc</p>
+</li>
+<li><p>进入容器终端命令</p>
+<p>kubectl exec -it nginx-8586cf59-mwwtc /bin/bash</p>
+</li>
+<li><p>一个Pod里含有多个容器 用–container or -c 参数。</p>
+<p>例如:假如这里有个Pod名为my-pod,这个Pod有两个容器,分别名为main-app 和 helper-app,下面的命令将打开到main-app的shell的容器里。</p>
+<p>kubectl exec -it my-pod –container main-app – /bin/bash</p>
+</li>
+<li><p>容器详情列表</p>
+<p>kubectl <em>describe</em> pod/mysql- m8rbl</p>
+</li>
+<li><p>查看容器状态</p>
+<p>kubectl get svc</p>
+</li>
+</ul>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/2019/04/04/springboot实战开发-笔记/">
+                springboot实战开发-笔记
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-04-04</span>
+            
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <p>一.核心<br>    1.基本配置：<br>        @SpringBootApplication@SpringBootApplication(exclude = {关闭特定的自动配置.class})是组合注解：<br>        @Configuratioon、@EnableAutoConfiguration、@ComponetScan<br>        <em>自动扫描同级包及其子包<br>    2.外部配置：<br>        @ImportResource({“classpath:xxx.xml”,””…})<br>        @ConfigurationProperties(prefix = “”,locations = “”)<br>            类型安全配置基于配置文件<br>    3.日志：<br>        默认Logback作为日志框架<br>    4.Profile配置<br>        application-{profile}.properties/yml<br>        –spring.profiles.active = {profile}<br>二.运行原理<br>    EnableAutoConfigurationImportSelector使用SpringFactoriesLoad.loadFactoryNames方法来扫描具有META-INF/spring.factories文件的jar包<br>三.Web开发<br>    1.模版引擎Thymeleaf<br>        th:元素 —— 动态处理的元素<br>        @{} —— 引用静态资源<br>        ${} —— 访问model中的数据
+        </em>JavaScript中访问model<br>            th:inline=”javascript”<br>            [[${}]] 获得值<br>    2.</p>
+
+        </div>
+    
+
+</div>
+            
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
             <a href="/2019/03/27/Spring Notes/">
                 SpringBoot 基础配置
             </a>
@@ -167,6 +315,7 @@
 <h3 id="整合Junit"><a href="#整合Junit" class="headerlink" title="整合Junit"></a>整合Junit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest(classes = MySpringBootApplication.class)</span><br></pre></td></tr></table></figure>
 <h3 id="整合Spring-Data-JPA"><a href="#整合Spring-Data-JPA" class="headerlink" title="整合Spring Data JPA"></a>整合Spring Data JPA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#DB Configuration:</span><br><span class="line">spring.datasource.driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">spring.datasource.url=jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br><span class="line">#JPA Configuration:</span><br><span class="line">spring.jpa.database=MySQL</span><br><span class="line">spring.jpa.show-sql=true</span><br><span class="line">spring.jpa.generate-ddl=true</span><br><span class="line">spring.jpa.hibernate.ddl-auto=update</span><br><span class="line">spring.jpa.hibernate.naming_strategy=org.hibernate.cfg.ImprovedNamingStrate</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">实体类</span><br><span class="line">@Id</span><br><span class="line">@GeneratedValue(strategy = GenerationType.IDENTITY)</span><br></pre></td></tr></table></figure>
 <h3 id="整合Redis"><a href="#整合Redis" class="headerlink" title="整合Redis"></a>整合Redis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Redis</span><br><span class="line">spring.redis.host=127.0.0.1</span><br><span class="line">spring.redis.port=6379</span><br></pre></td></tr></table></figure>
+<h3 id="Spring框架四大原则"><a href="#Spring框架四大原则" class="headerlink" title="Spring框架四大原则"></a>Spring框架四大原则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用POJO开发---轻量、最小侵入开发</span><br><span class="line">依赖注入、接口编程---松耦合</span><br><span class="line">AOP和约定---声明式编程</span><br><span class="line">AOP和template---减少模块化编程</span><br></pre></td></tr></table></figure>
 
         </div>
     
@@ -235,6 +384,14 @@
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
         <h2>Recent Posts</h2>
         <ul>
+            
+            <li>
+                <a class="footer-post" href="/2019/04/08/docer/">Untitled</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/04/04/springboot实战开发-笔记/">springboot实战开发-笔记</a>
+            </li>
             
             <li>
                 <a class="footer-post" href="/2019/03/27/Spring Notes/">SpringBoot 基础配置</a>
