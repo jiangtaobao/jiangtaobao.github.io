@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -165,8 +165,8 @@
         
 
         <!-- Post Content -->
-        <p>一.核心<br>    1.基本配置：<br>        @SpringBootApplication@SpringBootApplication(exclude = {关闭特定的自动配置.class})是组合注解：<br>        @Configuratioon、@EnableAutoConfiguration、@ComponetScan<br>        <em>自动扫描同级包及其子包<br>    2.外部配置：<br>        @ImportResource({“classpath:xxx.xml”,””…})<br>        @ConfigurationProperties(prefix = “”,locations = “”)<br>            类型安全配置基于配置文件<br>    3.日志：<br>        默认Logback作为日志框架<br>    4.Profile配置<br>        application-{profile}.properties/yml<br>        –spring.profiles.active = {profile}<br>二.运行原理<br>    EnableAutoConfigurationImportSelector使用SpringFactoriesLoad.loadFactoryNames方法来扫描具有META-INF/spring.factories文件的jar包<br>三.Web开发<br>    1.模版引擎Thymeleaf<br>        th:元素 —— 动态处理的元素<br>        @{} —— 引用静态资源<br>        ${} —— 访问model中的数据
-        </em>JavaScript中访问model<br>            th:inline=”javascript”<br>            [[${}]] 获得值<br>    2.</p>
+        <p>一.核心<br>    1.基本配置：<br>        @SpringBootApplication@SpringBootApplication(exclude = {关闭特定的自动配置.class})是组合注解：<br>        @Configuratioon、@EnableAutoConfiguration、@ComponetScan<br>        <em>自动扫描同级包及其子包<br>    2.外部配置：<br>        @ImportResource({“classpath:xxx.xml”,””…})<br>        @ConfigurationProperties(prefix = “”,locations = “”)<br>            类型安全配置基于配置文件<br>    3.日志：<br>        默认Logback作为日志框架<br>    4.Profile配置<br>        application-{profile}.properties/yml<br>        –spring.profiles.active = {profile}<br>二.运行原理<br>    EnableAutoConfigurationImportSelector使用SpringFactoriesLoad.loadFactoryNames方法来扫描具有META-INF/spring.factories文件的jar包<br>三.Web开发<br>    模版引擎Thymeleaf<br>        th:元素 —— 动态处理的元素<br>        @{} —— 引用静态资源<br>        ${} —— 访问model中的数据
+        </em>JavaScript中访问model<br>            th:inline=”javascript”<br>            [[${}]] 获得值<br>四.数据访问</p>
 
     </div>
 
@@ -204,7 +204,11 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2019/04/08/docer/">Untitled</a>
+                <a class="footer-post" href="/2019/04/18/hello-world/">Hello World</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/04/18/docer/">Untitled</a>
             </li>
             
             <li>
@@ -213,10 +217,6 @@
             
             <li>
                 <a class="footer-post" href="/2019/03/27/Spring Notes/">SpringBoot 基础配置</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/2019/03/27/hello-world/">Hello World</a>
             </li>
             
         </ul>
